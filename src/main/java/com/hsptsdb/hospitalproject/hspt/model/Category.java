@@ -1,12 +1,11 @@
 package com.hsptsdb.hospitalproject.hspt.model;
 
 public enum Category {
-    FANTASY ("Фантастика"),
-    SCIENCE_FICTION ("Научная фантастика"),
-    DRAMA ("Драма"),
+    F_DIAGNOSTIC ("Фун. Диагностика"),
+    UZI ("Узи"),
+    INJECTION ("Инъекция"),
     NOVEL("Роман"),
-    COMEDY("Комедия"),
-    ADVENTURE ("Приключения");
+    OTHER ("Прочее");
 
     private final String genreTextDisplay;
 

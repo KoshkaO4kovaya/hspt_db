@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-public class ClientDTO
+public class UserDTO
         extends GenericDTO{
     private String login;
     private String password;
@@ -25,6 +25,6 @@ public class ClientDTO
     private String address;
     private RoleDTO role;
     private String changePasswordToken;
-    private List<Long> userBooksRent;
+    private List<Long> userRequest;
     private boolean isDeleted;
 }

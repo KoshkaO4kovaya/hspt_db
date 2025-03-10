@@ -10,21 +10,18 @@ import java.util.List;
 @Table(name = "users",
         uniqueConstraints = {@UniqueConstraint(name = "uniqueEmail", columnNames = "email"),
                 @UniqueConstraint(name = "uniqueLogin", columnNames = "login")
-        }) // email и login должны быть уникальными
+        }) 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(name = "default_generator", sequenceName = "users_seq", allocationSize = 1)
-public class Client extends GenericModel{
-
-    @Column(name = "login", nullable = false)
-    private String login;
+public class User extends GenericModel{
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "birth_date", nullable = false)
@@ -54,6 +51,6 @@ public class Client extends GenericModel{
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<BookRentInfo> bookRentInfos;
+    private List<RequestUser> requestUsers;
 
 }

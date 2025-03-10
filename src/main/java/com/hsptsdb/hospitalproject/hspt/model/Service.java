@@ -20,37 +20,19 @@ import java.util.List;
 public class Service extends GenericModel {
 
     @Column(name = "title", nullable = false)
-    private String bookTitle;
+    private String serviceTitle;
 
-    @Column(name = "publisher")
-    private String publisher;
-
-    @Column(name = "publish_date", nullable = false)
-    private LocalDate publishDate;
-
-    @Column(name = "page_count")
-    private Integer pageCount;
-
-    @Column(name = "amount", nullable = false)
-    private Integer amount;
-
-    @Column(name = "storage_place", nullable = false)
-    private String storagePlace;
-
-    @Column(name = "online_copy_path")
-    private String onlineCopyPath;
-
-    @Column(name = "genre", nullable = false)
+    @Column(name = "category", nullable = false)
     @Enumerated
-    private Category genre;
+    private Category category;
 
     @Column(name = "description")
     private String description;
 
     @JsonIgnore // Избавляет от ошибки Stack Overflow, JSON зацикливается: У книги есть автор, у автора есть книга, у книги есть автор...
     @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "books_authors", // чтобы таблицы books и authors стали равнозначными. До этого authors была главнее
-            joinColumns = @JoinColumn(name = "book_id"), foreignKey = @ForeignKey(name = "FK_BOOKS_AUTHORS"),
-            inverseJoinColumns = @JoinColumn(name = "author_id"), inverseForeignKey = @ForeignKey(name = "FK_AUTHORS_BOOKS"))
-    List<Author> authors;
+    @JoinTable(name = "services_doctor",
+            joinColumns = @JoinColumn(name = "service_id"), foreignKey = @ForeignKey(name = "FK_BOOKS_AUTHORS"),
+            inverseJoinColumns = @JoinColumn(name = "doctor_id"), inverseForeignKey = @ForeignKey(name = "FK_AUTHORS_BOOKS"))
+    List<Doctor> doctors;
 }

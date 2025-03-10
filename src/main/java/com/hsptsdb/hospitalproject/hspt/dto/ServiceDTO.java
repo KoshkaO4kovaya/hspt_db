@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookDTO
+public class ServiceDTO
         extends GenericDTO {
     private String bookTitle;
     private LocalDate publishDate;
