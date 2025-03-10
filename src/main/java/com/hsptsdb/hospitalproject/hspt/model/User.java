@@ -54,6 +54,3 @@ public class User extends GenericModel{
     private List<RequestUser> requestUsers;
 
 }
-
-
-
