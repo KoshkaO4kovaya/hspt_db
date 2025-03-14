@@ -10,4 +10,5 @@ class HospitalProjectApplicationTests {
 	void contextLoads() {
 	}
 
+
 }
