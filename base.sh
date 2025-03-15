@@ -14,4 +14,4 @@ git add .
 
 git commit -m "$commit_message"
 
-git push "$remote_name" "$branch_name"
+git push origin "$branch_name"
