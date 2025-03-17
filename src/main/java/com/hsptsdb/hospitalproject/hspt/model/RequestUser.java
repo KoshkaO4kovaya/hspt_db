@@ -26,10 +26,7 @@ public class RequestUser {
             foreignKey = @ForeignKey(name = "FK_REQUEST_SERVICE"))
     private Service service;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "schedule_id", nullable = false,
-            foreignKey = @ForeignKey(name = "FK_REQUEST_SCHEDULE"))
-    private Schedule schedule;
+
 
     @Column(name = "rent_date", nullable = false)
     private LocalDateTime rentDate;

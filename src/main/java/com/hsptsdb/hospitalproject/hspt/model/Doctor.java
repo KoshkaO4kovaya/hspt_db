@@ -20,8 +20,6 @@ public class Doctor extends GenericModel {
     @Column(name = "email")
     private String email;
 
-
-
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
