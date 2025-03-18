@@ -43,7 +43,8 @@ public class User extends GenericModel{
     private String address;
 
     @Column(name = "gender", nullable = false)
-    private String gender;
+    @Enumerated
+    private Gender gender;
 
     @Column(name = "change_password_token")
     private String changePasswordToken;

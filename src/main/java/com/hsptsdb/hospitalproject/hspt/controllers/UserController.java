@@ -1,5 +1,12 @@
 package com.hsptsdb.hospitalproject.hspt.controllers;
 
+import com.hsptsdb.hospitalproject.hspt.config.jwt.JWTTokenUtil;
+import com.hsptsdb.hospitalproject.hspt.dto.LoginDTO;
+import com.hsptsdb.hospitalproject.hspt.dto.UserDTO;
+import com.hsptsdb.hospitalproject.hspt.model.User;
+import com.hsptsdb.hospitalproject.hspt.service.GenericService;
+import com.hsptsdb.hospitalproject.hspt.service.UserService;
+import com.hsptsdb.hospitalproject.hspt.service.userdetails.CustomUserDetailsService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RestController

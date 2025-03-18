@@ -1,6 +1,6 @@
 package com.hsptsdb.hospitalproject.hspt.dto;
 
-import com.aptproject.springlibraryproject.library.model.Genre;
+import com.hsptsdb.hospitalproject.hspt.model.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,16 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 public class ServiceDTO
         extends GenericDTO {
-    private String bookTitle;
+    private String categoryTitle;
     private LocalDate publishDate;
-    private String publisher;
-    private Integer pageCount;
-    private Integer amount;
-    private String storagePlace;
-    private String onlineCopyPath;
     private String description;
-    private Genre genre;
-    private List<Long> authorIds;
-    private List<AuthorDTO> authorInfo;
+    private Category category;
+    private List<Long> doctorIds;
+    private List<DoctorDTO> dctorInfo;
 }
 

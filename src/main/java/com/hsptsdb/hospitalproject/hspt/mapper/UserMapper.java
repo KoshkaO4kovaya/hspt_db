@@ -1,17 +1,12 @@
 package com.hsptsdb.hospitalproject.hspt.mapper;
 
-
 import com.hsptsdb.hospitalproject.hspt.dto.UserDTO;
-import com.hsptsdb.hospitalproject.hspt.model.GenericModel;
 import com.hsptsdb.hospitalproject.hspt.model.User;
-//import com.aptproject.springlibraryproject.library.repository.BookRentInfoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import com.hsptsdb.hospitalproject.hspt.model.GenericModel;
+import com.hsptsdb.hospitalproject.hspt.mapper.GenericMapper;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 //@Component
 //public class UserMapper
@@ -24,7 +19,7 @@ import java.util.stream.Collectors;
 //        super(User.class, UserDTO.class, modelMapper);
 //        this.bookRentInfoRepository = bookRentInfoRepository;
 //    }
-//
+
 //    @Override
 //    protected void setupMapper() {
 //        modelMapper.createTypeMap(User.class, UserDTO.class)
@@ -32,7 +27,7 @@ import java.util.stream.Collectors;
 //        modelMapper.createTypeMap(UserDTO.class, User.class)
 //                .addMappings(m -> m.skip(User::setBookRentInfos)).setPostConverter(toEntityConverter());
 //    }
-//
+
 //    @Override
 //    protected void mapSpecificFields(UserDTO source, User destination) {
 //        if (!Objects.isNull(source.getUserBooksRent())) {
@@ -42,7 +37,7 @@ import java.util.stream.Collectors;
 //            destination.setBookRentInfos(Collections.emptyList());
 //        }
 //    }
-//
+
 //    @Override
 //    protected void mapSpecificFields(User source, UserDTO destination) {
 //        destination.setUserBooksRent(getIds(source));

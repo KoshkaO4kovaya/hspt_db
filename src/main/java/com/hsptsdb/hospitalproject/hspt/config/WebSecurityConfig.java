@@ -1,6 +1,6 @@
 package com.hsptsdb.hospitalproject.hspt.config;
 
-import com.aptproject.springlibraryproject.library.service.userdetails.CustomUserDetailsService;
+import com.hsptsdb.hospitalproject.hspt.service.userdetails.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,20 +11,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import static com.aptproject.springlibraryproject.library.constants.SecurityConstants.*;
-import static com.aptproject.springlibraryproject.library.constants.UserRoleConstants.*;
 import static com.hsptsdb.hospitalproject.hspt.constants.SecurityConstants.*;
+import static com.hsptsdb.hospitalproject.hspt.constants.UserRoleConstants.*;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final CustomUserDetailsService customUserDetailsService;
 
-
-    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder, CustomUserDetailsService customUserDetailsService) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-
+        this.customUserDetailsService = customUserDetailsService;
     }
 
     @Bean
