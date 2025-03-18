@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Component
-public class UserMapper
-        extends GenericMapper<User, UserDTO> {
+//@Component
+//public class UserMapper
+//        extends GenericMapper<User, UserDTO> {
 
 //    private final BookRentInfoRepository bookRentInfoRepository;
 //
@@ -56,4 +56,4 @@ public class UserMapper
 //                .map(GenericModel::getId)
 //                .collect(Collectors.toList());
 //    }
-}
+//}

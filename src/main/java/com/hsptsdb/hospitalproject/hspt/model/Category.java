@@ -7,12 +7,12 @@ public enum Category {
     NOVEL("Роман"),
     OTHER ("Прочее");
 
-    private final String genreTextDisplay;
+    private final String categoryTextDisplay;
 
-    Category(String genreTextDisplay) {
-        this.genreTextDisplay = genreTextDisplay;
+    Category(String categoryTextDisplay) {
+        this.categoryTextDisplay = categoryTextDisplay;
     }
 
-    public String getGenreTextDisplay(){return genreTextDisplay;}
+    public String getCategoryTextDisplay(){return categoryTextDisplay;}
 }
 
