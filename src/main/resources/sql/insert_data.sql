@@ -1,7 +1,7 @@
 insert into public.roles
 values
    (1, 'Роль пользователя', 'USER'),
-   (2, 'Роль библиотекаря', 'LIBRARIAN');
+   (2, 'Роль доктора', 'DOCTOR');
 
 ----АВТОРЫ
 --drop sequence public.authors_sequence;

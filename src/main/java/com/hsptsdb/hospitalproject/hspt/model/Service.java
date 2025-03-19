@@ -11,12 +11,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table (name = "books")
+@Table (name = "service")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name = "default_generator", sequenceName = "books_sequence", allocationSize = 1)
+@SequenceGenerator(name = "default_generator", sequenceName = "service_sequence", allocationSize = 1)
 public class Service extends GenericModel {
 
     @Column(name = "title", nullable = false)

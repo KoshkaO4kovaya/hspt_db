@@ -8,13 +8,12 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Table(name = "request_user")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestUser {
+public class UserRequest {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", nullable = false,
@@ -26,7 +25,12 @@ public class RequestUser {
             foreignKey = @ForeignKey(name = "FK_REQUEST_SERVICE"))
     private Service service;
 
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private StatusRequest status;
 
+    @Column(name = "rent_date_time", nullable = false)
+    private LocalDateTime rentDateTime;
 
     @Column(name = "rent_date", nullable = false)
     private LocalDateTime rentDate;

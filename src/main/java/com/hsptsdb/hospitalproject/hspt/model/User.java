@@ -55,6 +55,6 @@ public class User extends GenericModel{
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<RequestUser> requestUsers;
+    private List<UserRequest> userRequests;
 
 }

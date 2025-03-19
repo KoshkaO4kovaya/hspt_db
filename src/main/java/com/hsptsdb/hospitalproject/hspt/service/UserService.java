@@ -5,15 +5,14 @@ import com.hsptsdb.hospitalproject.hspt.dto.RoleDTO;
 import com.hsptsdb.hospitalproject.hspt.dto.UserDTO;
 import com.hsptsdb.hospitalproject.hspt.mapper.GenericMapper;
 import com.hsptsdb.hospitalproject.hspt.repository.GenericRepository;
-import com.hsptsdb.hospitalproject.hspt.repository.UserRepository;
+import com.hsptsdb.hospitalproject.hspt.model.User;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.validator.constraints.UUID;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.mail.SimpleMailMessage;
+//import org.hibernate.validator.constraints.UUID;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.PageImpl;
+//import org.springframework.data.domain.Pageable;
+//import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,14 +25,14 @@ import java.time.LocalDateTime;
 public class UserService
         extends GenericService<User, UserDTO> {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final JavaMailSender javaMailSender;
+//    private final JavaMailSender javaMailSender;
 
     public UserService(GenericRepository<User> repository,
                        GenericMapper<User, UserDTO> mapper,
                        BCryptPasswordEncoder bCryptPasswordEncoder, JavaMailSender javaMailSender) {
         super(repository, mapper);
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.javaMailSender = javaMailSender;
+//        this.javaMailSender = javaMailSender;
     }
 
     @Override
@@ -47,13 +46,13 @@ public class UserService
         return mapper.toDTO(repository.save(mapper.toEntity(newObject)));
     }
 
-    public UserDTO createLibrarian(UserDTO newObject) {
-        RoleDTO roleDTO = new RoleDTO();
-        roleDTO.setId(2L);
-        newObject.setRole(roleDTO);
-        newObject.setCreatedBy("LIBRARIAN CREATION FORM");
-        return create(newObject);
-    }
+//    public UserDTO createDoctor(UserDTO newObject) {
+//        RoleDTO roleDTO = new RoleDTO();
+//        roleDTO.setId(2L);
+//        newObject.setRole(roleDTO);
+//        newObject.setCreatedBy("LIBRARIAN CREATION FORM");
+//        return create(newObject);
+//    }
 
 //    public UserDTO getUserByLogin(final String login) {
 //        return mapper.toDTO(((UserRepository) repository).findUserByLogin(login));
