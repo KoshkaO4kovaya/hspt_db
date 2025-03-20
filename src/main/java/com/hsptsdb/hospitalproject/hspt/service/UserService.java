@@ -1,110 +1,44 @@
 package com.hsptsdb.hospitalproject.hspt.service;
 
-
-import com.hsptsdb.hospitalproject.hspt.dto.RoleDTO;
 import com.hsptsdb.hospitalproject.hspt.dto.UserDTO;
-import com.hsptsdb.hospitalproject.hspt.mapper.GenericMapper;
-import com.hsptsdb.hospitalproject.hspt.repository.GenericRepository;
+import com.hsptsdb.hospitalproject.hspt.mapper.UserMapper;
 import com.hsptsdb.hospitalproject.hspt.model.User;
-import lombok.extern.slf4j.Slf4j;
-//import org.hibernate.validator.constraints.UUID;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.PageImpl;
-//import org.springframework.data.domain.Pageable;
-//import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.hsptsdb.hospitalproject.hspt.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-
-@Slf4j
 @Service
-public class UserService
-        extends GenericService<User, UserDTO> {
+public class UserService extends GenericService<User, UserDTO> {
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-//    private final JavaMailSender javaMailSender;
 
-    public UserService(GenericRepository<User> repository,
-                       GenericMapper<User, UserDTO> mapper,
-                       BCryptPasswordEncoder bCryptPasswordEncoder, JavaMailSender javaMailSender) {
-        super(repository, mapper);
+    public UserService(UserRepository userRepository, UserMapper userMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        super(userRepository, userMapper);
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-//        this.javaMailSender = javaMailSender;
+    }
+    public UserDTO registration(UserDTO userDTO) {
+        if (userRepository.findUserByEmail(userDTO.getEmail()) != null) {
+            throw new RuntimeException("Пользователь с таким email'ом уже существует"); //  исправить на кастомный эксепшн
+        }
+        userDTO. setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
+        userDTO.setChangePasswordToken(UUID.randomUUID().toString());
+        userDTO.setCreatedWhen(LocalDateTime.now());
+        return mapper.toDTO(repository.save(mapper.toEntity(userDTO)));
+    }
+    public void activateUser(String token) {
+        User user = userRepository.findUserByChangePasswordToken(token);
+        if (user == null) {
+            throw new RuntimeException("Неверная ссылка для активации");
+        }
     }
 
-    @Override
-    public UserDTO create(UserDTO newObject) {
-        RoleDTO roleDTO = new RoleDTO();
-        roleDTO.setId(1L);
-        newObject.setRole(roleDTO);
-        newObject.setPassword(bCryptPasswordEncoder.encode(newObject.getPassword()));
-        newObject.setCreatedBy("REGISTRATION FORM");
-        newObject.setCreatedWhen(LocalDateTime.now());
-        return mapper.toDTO(repository.save(mapper.toEntity(newObject)));
-    }
-
-//    public UserDTO createDoctor(UserDTO newObject) {
-//        RoleDTO roleDTO = new RoleDTO();
-//        roleDTO.setId(2L);
-//        newObject.setRole(roleDTO);
-//        newObject.setCreatedBy("LIBRARIAN CREATION FORM");
-//        return create(newObject);
+//    public UserDTO findByEmail(String email) {
+//        return userMapper.toDTO(userRepository.findUserByEmail(email));
 //    }
-
-//    public UserDTO getUserByLogin(final String login) {
-//        return mapper.toDTO(((UserRepository) repository).findUserByLogin(login));
-//    }
-//
-//    public UserDTO getUserByEmail(final String email) {
-//        return mapper.toDTO(((UserRepository) repository).findUserByEmail(email));
-//    }
-
-    public boolean checkPassword(String password, UserDetails foundUser) {
-        return bCryptPasswordEncoder.matches(password, foundUser.getPassword());
-    }
-
-//    public void sendChangePasswordEmail(final UserDTO userDTO) {
-//        // Переписали для 11-й лекции (из-за cron)
-//        UUID uuid = UUID.randomUUID();
-//        log.info("Generated Token: {}", uuid);
-//
-//        userDTO.setChangePasswordToken(uuid.toString());
-//        update(userDTO);
-//
-//        SimpleMailMessage mailMessage = MailUtils.createMailMessage(
-//                userDTO.getEmail(),
-//                MailConstants.MAIL_SUBJECT_FOR_REMEMBER_PASSWORD,
-//                MailConstants.MAIL_MESSAGE_FOR_REMEMBER_PASSWORD + uuid
-//        );
-//
-//        javaMailSender.send(mailMessage);
-//    }
-//
-//    public void changePassword(String uuid, String password) {
-//        UserDTO userDTO = mapper.toDTO(((UserRepository) repository).findUserByChangePasswordToken(uuid));
-//
-//        userDTO.setChangePasswordToken(null);
-//        userDTO.setPassword(bCryptPasswordEncoder.encode(password));
-//
-//        update(userDTO);
-//    }
-//
-//    public List<String> getUserEmailsWithDelayedRentDate() {
-//        return ((UserRepository) repository).getDelayedEmails();
-//    }
-//
-//    public Page<UserDTO> findUsers(UserDTO userDTO, Pageable pageable) {
-//        Page<User> users = ((UserRepository) repository).searchUsers(
-//                userDTO.getFirstName(),
-//                userDTO.getLastName(),
-//                userDTO.getLogin(),
-//                pageable
-//        );
-//        List<UserDTO> result = mapper.toDTOs(users.getContent());
-//        return new PageImpl<>(result, pageable, users.getTotalElements());
-//    }
-
 }

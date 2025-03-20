@@ -11,9 +11,6 @@ import java.util.List;
 @Repository
 public interface UserRepository extends GenericRepository<User> {
 
-    User findUserByLogin(String login);
-
-    User findUserByLoginAndIsDeletedFalse(String login);
 
     User findUserByEmail(String email);
 

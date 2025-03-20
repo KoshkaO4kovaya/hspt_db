@@ -1,5 +1,6 @@
 package com.hsptsdb.hospitalproject.hspt.dto;
 
+import com.hsptsdb.hospitalproject.hspt.model.Gender;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class UserDTO
         extends GenericDTO{
-    private String login;
+    private String name;
     private String password;
     private String email;
     private LocalDate birthDate;
@@ -24,6 +25,7 @@ public class UserDTO
     private String phone;
     private String address;
     private RoleDTO role;
+    private Gender gender;
     private String changePasswordToken;
     private List<Long> userRequest;
     private boolean isDeleted;

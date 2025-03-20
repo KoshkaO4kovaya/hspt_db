@@ -1,7 +1,6 @@
 package com.hsptsdb.hospitalproject.hspt.config;
 
-import com.hsptsdb.hospitalproject.hspt.service.userdetails.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,18 +18,14 @@ import static com.hsptsdb.hospitalproject.hspt.constants.UserRoleConstants.*;
 public class WebSecurityConfig {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final CustomUserDetailsService customUserDetailsService;
 
-    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder, CustomUserDetailsService customUserDetailsService) {
+    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.customUserDetailsService = customUserDetailsService;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .cors().disable()
-                .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(RESOURCES_WHITE_LIST.toArray(String[]::new)).permitAll()
                         .requestMatchers(USERS_WHITE_LIST.toArray(String[]::new)).permitAll()
@@ -55,9 +50,5 @@ public class WebSecurityConfig {
         return httpSecurity.build();
     }
 
-    @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
-    }
 
 }

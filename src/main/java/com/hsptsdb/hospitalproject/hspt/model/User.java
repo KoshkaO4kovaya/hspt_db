@@ -27,6 +27,9 @@ public class User extends GenericModel{
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -53,8 +56,4 @@ public class User extends GenericModel{
     @JoinColumn(name = "role_id", nullable = false,
             foreignKey = @ForeignKey(name = "USERS_ROLES"))
     private Role role;
-
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<UserRequest> userRequests;
-
 }
