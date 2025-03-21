@@ -9,5 +9,5 @@ public enum Gender {
         this.genderTextDisplay = genderTextDisplay;
     }
 
-    public String getGenderTextDisplayenderTextDisplay(){return genderTextDisplay;}
+    public String getGenderTextDisplayGenderTextDisplay(){return genderTextDisplay;}
 }

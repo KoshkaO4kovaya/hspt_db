@@ -26,19 +26,8 @@ public class UserService extends GenericService<User, UserDTO> {
         if (userRepository.findUserByEmail(userDTO.getEmail()) != null) {
             throw new RuntimeException("Пользователь с таким email'ом уже существует"); //  исправить на кастомный эксепшн
         }
-        userDTO. setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
-        userDTO.setChangePasswordToken(UUID.randomUUID().toString());
+        userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         userDTO.setCreatedWhen(LocalDateTime.now());
         return mapper.toDTO(repository.save(mapper.toEntity(userDTO)));
     }
-    public void activateUser(String token) {
-        User user = userRepository.findUserByChangePasswordToken(token);
-        if (user == null) {
-            throw new RuntimeException("Неверная ссылка для активации");
-        }
-    }
-
-//    public UserDTO findByEmail(String email) {
-//        return userMapper.toDTO(userRepository.findUserByEmail(email));
-//    }
 }

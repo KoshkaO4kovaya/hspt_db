@@ -15,7 +15,6 @@ import java.util.List;
 @Component
 public class UserMapper extends GenericMapper<User, UserDTO>{
 
-
     public UserMapper(ModelMapper modelMapper) {
         super(User.class, UserDTO.class, modelMapper);
     }
