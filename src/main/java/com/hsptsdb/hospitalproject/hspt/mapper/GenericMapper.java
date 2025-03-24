@@ -11,10 +11,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-public abstract class GenericMapper<E extends GenericModel, D extends GenericDTO>
+public abstract class GenericMapper <E extends GenericModel, D extends GenericDTO>
         implements Mapper<E, D> {
 
-     // Внедрение всех необходимых зависимостей
      private final Class<E> entityClass;
      private final Class<D> dtoClass;
      protected final ModelMapper modelMapper;
@@ -26,7 +25,6 @@ public abstract class GenericMapper<E extends GenericModel, D extends GenericDTO
           this.dtoClass = dtoClass;
           this.modelMapper = modelMapper;
      }
-
      @Override
      public E toEntity(D dto) {
           return Objects.isNull(dto)
@@ -47,10 +45,9 @@ public abstract class GenericMapper<E extends GenericModel, D extends GenericDTO
      }
 
      @Override
-     public List<D> toDTOs(List<E> entities) {
-          return entities.stream().map(this::toDTO).toList();
-     }
+     public List<D> toDTOs(List<E> entities) {return entities.stream().map(this::toDTO).toList();}
 
+     // Конвертеры для mepSpecificFields
      protected Converter<D, E> toEntityConverter() {
           return context -> {
                D source = context.getSource();
@@ -59,7 +56,6 @@ public abstract class GenericMapper<E extends GenericModel, D extends GenericDTO
                return context.getDestination();
           };
      }
-
      protected Converter<E, D> toDTOConverter() {
           return context -> {
                E source = context.getSource();
@@ -69,18 +65,11 @@ public abstract class GenericMapper<E extends GenericModel, D extends GenericDTO
           };
      }
 
-     protected void mapSpecificFields(D source, E destination) {
-     }
-     protected void mapSpecificFields(E source, D destination) {
-     }
-
-     /**
-      * Настройка маппера на случай несовпадения source/destination
-      */
+     protected abstract void mapSpecificFields(D source, E destination);
+     protected abstract void mapSpecificFields(E source, D destination);
 
      @PostConstruct
-     protected  abstract void setupMapper();
-
-     protected abstract List<Long> getIds(E Entity);
+     protected abstract void setupMapper();
+     protected abstract List<Long> getIds(E entity);
 
 }

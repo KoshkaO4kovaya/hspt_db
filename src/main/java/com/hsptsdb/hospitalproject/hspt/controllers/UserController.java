@@ -4,6 +4,7 @@ import com.hsptsdb.hospitalproject.hspt.dto.UserDTO;
 import com.hsptsdb.hospitalproject.hspt.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,9 @@ public class UserController {
 
     @Operation(summary = "Регистрация пользователя", description = "Позволяет пользователю зарегистрироваться в системе.")
     @PostMapping("/registration")
-    public ResponseEntity<UserDTO> registration(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> registration(@Valid @RequestBody UserDTO userDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(userService.registration(userDTO));
+                .body(userService.create(userDTO)); // <- Используем userService.create
     }
 }
+//5332

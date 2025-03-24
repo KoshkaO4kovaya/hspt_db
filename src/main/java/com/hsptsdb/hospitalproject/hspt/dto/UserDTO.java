@@ -27,22 +27,24 @@ public class UserDTO extends GenericDTO {
     @Email(message = "Неверный формат email")
     private String email;
 
-    private LocalDate birthDate;
-
-    @NotBlank(message = "Имя не может быть пустым")
-    private String firstName;
-
     @NotBlank(message = "Фамилия не может быть пустой")
-    private String lastName;
+    private String surname;
 
-    private String middleName;
+    @NotBlank(message = "Снилс не можеь быть пустым")
+    @Pattern(regexp = "\\d{11}", message = "Снилс должен состоять из 11 цифр")
+    private String snils;
 
-    @Pattern(regexp = "\\d{10}", message = "Неверный формат телефона")
+    @Pattern(regexp = "\\d{11}", message = "Неверный формат телефона")
     private String phone;
 
     @NotBlank(message = "Адрес не может быть пустым")
     private String address;
 
+    private String patronym;
+    private String series_passport;
+    private String number_passport;
+    private LocalDate data_passport;
+    private LocalDate birthDate;
     private RoleDTO role;
     private Gender gender;
 

@@ -30,20 +30,29 @@ public class User extends GenericModel{
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name ="surname", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "patronym", nullable = false)
     private String lastName;
-
-    @Column(name = "middle_name")
-    private String middleName;
 
     @Column(name = "phone", nullable = false)
     private String phone;
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @Column(name = "snils", nullable = false)
+    private String snils;
+
+    @Column(name = "series_passport")
+    private String series_passport;
+
+    @Column(name = "number_passport")
+    private String number_passport;
+
+    @Column(name = "data_passport")
+    private LocalDate data_passport;
 
     @Column(name = "gender", nullable = false)
     @Enumerated

@@ -4,11 +4,9 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
 @NoArgsConstructor
-public class RoleDTO {
-    private Long id;
+public class RoleDTO  extends GenericDTO  {
     private String title;
     private String description;
 }

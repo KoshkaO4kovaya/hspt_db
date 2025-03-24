@@ -1,9 +1,7 @@
 package com.hsptsdb.hospitalproject.hspt.config;
 
-;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,11 +15,11 @@ import static com.hsptsdb.hospitalproject.hspt.constants.UserRoleConstants.*;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
+//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+//
+//    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder) {
+//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
