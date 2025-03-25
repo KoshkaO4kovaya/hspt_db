@@ -22,33 +22,6 @@ import static com.hsptsdb.hospitalproject.hspt.constants.UserRoleConstants.*;
 public class WebSecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .cors().configurationSource(corsConfigurationSource()) // Добавляем конфигурацию CORS
-                .and()
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(RESOURCES_WHITE_LIST.toArray(String[]::new)).permitAll()
-                        .requestMatchers(USERS_WHITE_LIST.toArray(String[]::new)).permitAll()
-                        .requestMatchers(DOCTORS_PERMISSIONS_LIST.toArray(String[]::new)).hasAnyRole(ADMIN, DOCTOR)
-                        .anyRequest().authenticated()
-                )
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/")
-                        .permitAll()
-                )
-                .logout((logout) -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                        .permitAll()
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                );
-        return httpSecurity.build();
-    }
-
-    @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:8080")); // Разрешаем запросы с этого источника и Swagger
