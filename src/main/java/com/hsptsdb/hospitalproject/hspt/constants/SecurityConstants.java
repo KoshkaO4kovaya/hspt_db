@@ -10,7 +10,8 @@ public interface SecurityConstants {
             "/swagger-ui/**",
             "/swagger-resources/**", // Добавь эту строку
             "/v2/api-docs/**",
-            "/swagger-ui.html"
+            "/swagger-ui.html",
+            "/swagger-ui/index.html"
     );
     List<String> USERS_WHITE_LIST = List.of(
             "/api/auth/registration",

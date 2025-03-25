@@ -7,6 +7,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static com.hsptsdb.hospitalproject.hspt.constants.SecurityConstants.*;
 import static com.hsptsdb.hospitalproject.hspt.constants.UserRoleConstants.*;
@@ -15,22 +21,17 @@ import static com.hsptsdb.hospitalproject.hspt.constants.UserRoleConstants.*;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-//
-//    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder) {
-//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-//    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .cors().configurationSource(corsConfigurationSource()) // Добавляем конфигурацию CORS
+                .and()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(RESOURCES_WHITE_LIST.toArray(String[]::new)).permitAll()
                         .requestMatchers(USERS_WHITE_LIST.toArray(String[]::new)).permitAll()
                         .requestMatchers(DOCTORS_PERMISSIONS_LIST.toArray(String[]::new)).hasAnyRole(ADMIN, DOCTOR)
-                        .anyRequest().authenticated() // Все прочие запросы доступны аутентифицированным пользователям
+                        .anyRequest().authenticated()
                 )
-                // Настраиваем вход в систему
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/")
@@ -44,9 +45,18 @@ public class WebSecurityConfig {
                         .permitAll()
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 );
-
         return httpSecurity.build();
     }
 
-
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:8080")); // Разрешаем запросы с этого источника и Swagger
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
+        configuration.setExposedHeaders(List.of("x-auth-token"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }

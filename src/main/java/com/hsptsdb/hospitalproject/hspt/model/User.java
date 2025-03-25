@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "users",
         uniqueConstraints = {@UniqueConstraint(name = "uniqueEmail", columnNames = "email"),
                 @UniqueConstraint(name = "uniqueLogin", columnNames = "login")
-        }) 
+        })
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,10 +31,10 @@ public class User extends GenericModel{
     private String name;
 
     @Column(name ="surname", nullable = false)
-    private String firstName;
+    private String surname;
 
     @Column(name = "patronym", nullable = false)
-    private String lastName;
+    private String patronym;
 
     @Column(name = "phone", nullable = false)
     private String phone;
